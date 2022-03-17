@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% set pagetitle = 'Omrekenen' %}
+{% block content %}
+
+<div class='itemContainer'>
+    {% for page in Pages[0][1] %}
+        {% call itemContainerItem(Pages[0][0],page) %} {{page}} {% endcall %}
+    {% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block footer %}
+
+    {% call card(class='breadCrumbTrail') %}
+        <div class='Grid5'>
+            {% for page in Cookie %}
+                {% call itemContainerItem(url=page, img=page+'.svg') %}
+                    {% set category = page.split('/')[1] %}
+                    {{ category }}
+                {% endcall %}
+            {% endfor %}
+        </div>
+    {% endcall %}
+
+{% endblock %}

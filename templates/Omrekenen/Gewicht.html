@@ -1,0 +1,185 @@
+{% extends "page_base.html" %}
+
+{% set pagetitle = 'Gewicht omrekenen' %}
+
+{% block head %}
+<script>
+var precision= 3;
+
+function Calculate(){
+    var inputType = document.getElementById('typeIn').value;
+    var outputType= document.getElementById('typeOut').value;
+    var input     = document.getElementById('input').value;
+    var output = 0;
+    if (inputType=='MG') {output = input/1000;}
+    if (inputType=='CG') {output = input/100;}
+    if (inputType=='DG') {output = input/10;}
+    if (inputType=='G')  {output = input*1;}
+    if (inputType=='DAG'){output = input*10;}
+    if (inputType=='HG') {output = input*100;}
+    if (inputType=='KG') {output = input*1000;}
+    if (inputType=='P')  {output = input*454;}
+    if (inputType=='O')  {output = input*28.350;}
+
+    document.getElementById('MG').innerHTML = (output*1000).toFixed(precision);
+    document.getElementById('CG').innerHTML = (output*100).toFixed(precision);
+    document.getElementById('DG').innerHTML = (output*10).toFixed(precision);
+    document.getElementById('G').innerHTML  =  output.toFixed(precision);
+    document.getElementById('DAG').innerHTML= (output/10).toFixed(precision);
+    document.getElementById('HG').innerHTML = (output/100).toFixed(precision);
+    document.getElementById('KG').innerHTML = (output/1000).toFixed(precision);
+
+    document.getElementById('P').innerHTML = (output/454).toFixed(precision);
+    document.getElementById('O').innerHTML = (output/28.350).toFixed(precision);
+
+    if (outputType=='MG') {output = output*1000;}
+    if (outputType=='CG') {output = output*100;}
+    if (outputType=='DG') {output = output*10;}
+    if (outputType=='G')  {output = output;}
+    if (outputType=='DAG'){output = output/10;}
+    if (outputType=='HG') {output = output/100;}
+    if (outputType=='KG') {output = output/1000;}
+    if (outputType=='P')  {
+        if (inputType=='O'){
+            output = input/16;
+            document.getElementById('P').innerHTML = (input/16).toFixed(precision);
+        }
+        else {
+            output = output/454;
+        }
+    }
+    if (outputType=='O')  {
+        if (inputType=='P'){
+            output = input*16;
+            document.getElementById('O').innerHTML = (input*16).toFixed(precision);
+        }
+        else {
+            output = output/28.350;
+        }
+    }
+
+    document.getElementById('output').value = output.toFixed(precision);
+
+
+}
+</script>
+{% endblock %}
+
+{% block content %}
+
+{% call row(id='row') %}
+    {% call card(id='result') %}
+
+        <table style='width:100%;'>
+            <tr>
+                <td style='width: 35%;'>
+                    <select id='typeIn' style='width:100%'>
+                        <option value='MG' >Milligram</option>
+                        <option value='CG' >Centigram</option>
+                        <option value='DG' >Decigram</option>
+                        <option value='G'  >Gram</option>
+                        <option value='DAG'>Decagram</option>
+                        <option value='HG' >Hectogram</option>
+                        <option value='KG' >Kilogram</option>
+                        <option value='P'  >Pound</option>
+                        <option value='O'  >Ounce</option>
+                    </select>
+                </td>
+
+                <td style='width: 30%;'>
+                    <center>
+                        <button onclick='Calculate()'>Omrekenen</button>
+                    </center>
+                </td>
+
+                <td style='width: 35%;'>
+                    <select id='typeOut' style='width:100%'>
+                        <option value='MG' >Milligram</option>
+                        <option value='CG' >Centigram</option>
+                        <option value='DG' >Decigram</option>
+                        <option value='G'  >Gram</option>
+                        <option value='DAG'>Decagram</option>
+                        <option value='HG' >Hectogram</option>
+                        <option value='KG' >Kilogram</option>
+                        <option value='P'  >Pound</option>
+                        <option value='O'  >Ounce</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type='number' id='input' placeholder='Waarde' style='width:100%;'></input>
+                </td>
+                <td>
+                    <div style='padding:5px; border-radius:5px; background-color:#1A1E23;height:100%;'>
+                        <center>
+                            <div style='background-color: #ff7a14; max-width:80px; height: 32px;
+                            clip-path: polygon(0 35%, 60% 35%, 60% 0%, 100% 50%, 60% 100%, 60% 65%, 0 65%);'></div>
+                        </center>
+                    </div>
+                </td>
+                <td>
+                    <input type='number' id='output' placeholder='Waarde' style='width:100%;'></input>
+                </td>
+            </tr>
+        </table>
+
+    {% endcall %}
+    {% call card(wrapperClass='small') %}
+    <div class='results'>
+
+        <div>
+            <p>Metrisch</p>
+            <table class='results'>
+                <tr>
+                    <td>Milligram</td>
+                    <td id='MG'>0.000</td>
+                </tr>
+                <tr>
+                    <td>Centigram</td>
+                    <td id='CG'>0.000</td>
+                </tr>
+                <tr>
+                    <td>Decigram</td>
+                    <td id='DG'>0.000</td>
+                </tr>
+                <tr>
+                    <td>Gram</td>
+                    <td id='G'>0.000</td>
+                </tr>
+                <tr>
+                    <td>Decagram</td>
+                    <td id='DAG'>0.000</td>
+                </tr>
+                <tr>
+                    <td>Hectogram</td>
+                    <td id='HG'>0.000</td>
+                </tr>
+                <tr>
+                    <td>Kilogram</td>
+                    <td id='KG'>0.000</td>
+                </tr>
+            </table>
+        </div>
+
+        <div>
+            <p>Imperiaal</p>
+            <table>
+                <tr>
+                    <td>Pound</td>
+                    <td id='P'>0.000</td>
+                </tr>
+                <tr>
+                    <td>Ounce</td>
+                    <td id='O'>0.000</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+    {% endcall %}
+{% endcall %}
+
+
+{% endblock %}

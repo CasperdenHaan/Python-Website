@@ -1,0 +1,113 @@
+{% extends 'page_base.html' %}
+
+{% set pagetitle = 'Verhoudingen berekenen' %}
+
+{% block head %}
+<script>
+    function GGD(x, y) {
+      if ((typeof x !== 'number') || (typeof y !== 'number'))
+            return false;
+        x = Math.abs(x);
+        y = Math.abs(y);
+        while(y) {
+            var t = y;
+            y = x % y;
+           x = t;
+        }
+        return x;
+    }
+
+    var last = 'W';
+
+    function Calculate(){
+        var InW = document.getElementById('W').value;
+        var InH = document.getElementById('H').value;
+        var Type= document.getElementById('Type').value;
+
+
+        var Out = InH/InW;
+
+        var percent = 100*Out + "%";
+        document.getElementById('DBox').style.paddingBottom = percent;
+
+        if (Type==='1') {
+            var ratio = (InW/InH).toString();
+            if (ratio.length > 6){
+                document.getElementById('DText').innerHTML = "~" + ratio.substring(0,7) + ':1';
+            }
+            else {
+                document.getElementById('DText').innerHTML = ratio + ':1';
+            }
+        }
+
+        else if (Type==='K') {
+            var ggd = GGD(parseInt(InW), parseInt(InH));
+            document.getElementById('DText').innerHTML = InW/ggd+':'+InH/ggd;
+        }
+
+
+        var NW = document.getElementById('NW').value;
+        var NH = document.getElementById('NH').value;
+
+        if (last == 'H') {
+            document.getElementById('NW').value = (InW/InH)*NH;
+        }
+        if (last == 'W') {
+            document.getElementById('NH').value = (InH/InW)*NW;
+        }
+
+    }
+</script>
+{% endblock %}
+
+{% block content %}
+
+    {% call card() %}
+        <p>Vul de lengte en breedte in, of twee andere waardes die in dezelfde verhouding moeten blijven. Daarna kan je ook een nieuwe lengte of breedte invullen, om de andere helft te berekenen.</p>
+    {% endcall %}
+
+    <div class='Grid2M'>
+
+        <div>
+            {% call card() %}
+                <div class='Grid3'>
+                    <input type='number' placeholder='Eg. Width'  style='width:100%;' id='W' value=1 onchange='Calculate();' min=1>
+                    <input type='number' placeholder='Eg. Height' style='width:100%;' id='H' value=1 onchange='Calculate();' min=1>
+                    <select id='Type' onchange='Calculate();'>
+                        <option value='K'>Kleinste ronde breuk</option>
+                        <option value='1'>In verhouding tot 1</option>
+                    </select>
+                    <p></p>
+                    <button onclick='Calculate();'>Bereken</button>
+                </div>
+            {% endcall %}
+
+            {% call card() %}
+                <center>
+                    <h1>Verhouding gebruiken</h1>
+                </center>
+            {% endcall %}
+
+            {% call card() %}
+                <div class='Grid3'>
+                    <input type='number' placeholder='Nieuwe Width'  style='width:100%;' id='NW' onclick='document.getElementById("NH").value=""; last="W";'>
+                    <button onclick='Calculate();'>Bereken</button>
+                    <input type='number' placeholder='Nieuwe Height' style='width:100%;' id='NH' onclick='document.getElementById("NW").value=""; last="H";'>
+                </div>
+            {% endcall %}
+        </div>
+
+
+        {% call card() %}
+            <div style='width:100%; background-color: #FF7A14; padding-bottom:100%;
+                        border-radius: 5px; position:relative;' id='DBox'>
+                <h1 style='position: absolute; transform: translate(-50%,-50%); top: 50%; left: 50%;
+                margin: 0px; color:white' id='DText'>1:1</h1>
+
+                <p style='position: absolute; transform: translateX(-50%); left: 50%;'>Width</p>
+                <p style='position: absolute; transform: rotate(-90deg) translateX(50%); top: 50%;'>Height</p>
+            </div>
+        {% endcall %}
+    </div>
+
+{% endblock %}

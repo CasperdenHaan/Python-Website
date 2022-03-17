@@ -1,0 +1,178 @@
+{% extends "page_base.html" %}
+
+{% set pagetitle = 'Tijd omrekenen' %}
+
+{% block head %}
+<script>
+var precision= 3;
+
+function Calculate(){
+    var inputType = document.getElementById('typeIn').value;
+    var outputType= document.getElementById('typeOut').value;
+    var input     = document.getElementById('input').value;
+    var output = 0
+
+    if (inputType=='MS' ) {output = input/68400000;}
+    if (inputType=='S'  ) {output = input/86400;}
+    if (inputType=='MI' ) {output = input/1440;}
+    if (inputType=='H'  ) {output = input/24;}
+    if (inputType=='D'  ) {output = input;}
+    if (inputType=='W'  ) {output = input*7;}
+    if (inputType=='MA' ) {output = input*30;}
+    if (inputType=='Q'  ) {output = input*90;}
+    if (inputType=='Y'  ) {output = input*365;}
+    if (inputType=='DE' ) {output = input*3652;}
+    if (inputType=='C'  ) {output = input*36525;}
+    if (inputType=='MIL') {output = input*365250;}
+
+    document.getElementById('MS' ).innerHTML = (output*68400000).toFixed(precision);
+    document.getElementById('S'  ).innerHTML = (output*68400).toFixed(precision);
+    document.getElementById('MI' ).innerHTML = (output*1440).toFixed(precision);
+    document.getElementById('H'  ).innerHTML = (output*24).toFixed(precision);
+    document.getElementById('D'  ).innerHTML = (output*1).toFixed(precision);
+    document.getElementById('W'  ).innerHTML = (output/7).toFixed(precision);
+    document.getElementById('MA' ).innerHTML = (output/30).toFixed(precision);
+    document.getElementById('Q'  ).innerHTML = (output/90).toFixed(precision);
+    document.getElementById('Y'  ).innerHTML = (output/365).toFixed(precision);
+    document.getElementById('DE' ).innerHTML = (output/3652).toFixed(precision);
+    document.getElementById('C'  ).innerHTML = (output/36525).toFixed(precision);
+    document.getElementById('MIL').innerHTML = (output/365250).toFixed(precision);
+
+    if (outputType=='MS' ) {output = output*68400000;}
+    if (outputType=='S'  ) {output = output*68400;}
+    if (outputType=='MI' ) {output = output*1440;}
+    if (outputType=='H'  ) {output = output*24;}
+    if (outputType=='D'  ) {output = output;}
+    if (outputType=='W'  ) {output = output/7;}
+    if (outputType=='MA' ) {output = output/30;}
+    if (outputType=='Q'  ) {output = output/90;}
+    if (outputType=='Y'  ) {output = output/365;}
+    if (outputType=='DE' ) {output = output/2652;}
+    if (outputType=='C'  ) {output = output/36525;}
+    if (outputType=='MIL') {output = output/365250;}
+
+    document.getElementById('output').value = output.toFixed(precision);
+
+
+
+}
+</script>
+{% endblock %}
+
+{% block content %}
+
+{% call row(id='row') %}
+    {% call card(id='result') %}
+
+        <table style='width:100%;'>
+            <tr>
+                <td style='width: 35%;'>
+                    <select id='typeIn' style='width:100%'>
+                        <option value='MS' >Milliseconde </option>
+                        <option value='S'  >Seconde      </option>
+                        <option value='MI' >Minuut       </option>
+                        <option value='H'  >Uur          </option>
+                        <option value='D'  >Dag          </option>
+                        <option value='W'  >Week         </option>
+                        <option value='MA' >Maand        </option>
+                        <option value='Q'  >Kwartaal     </option>
+                        <option value='Y'  >Jaar         </option>
+                        <option value='DE' >Decennium    </option>
+                        <option value='C'  >Eeuw         </option>
+                        <option value='MIL'>Millenium    </option>
+                    </select>
+                </td>
+
+                <td style='width: 30%;'>
+                    <center>
+                        <button onclick='Calculate()'>Omrekenen</button>
+                    </center>
+                </td>
+
+                <td style='width: 35%;'>
+                    <select id='typeOut' style='width:100%'>
+                        <option value='MS' >Milliseconde </option>
+                        <option value='S'  >Seconde      </option>
+                        <option value='MI' >Minuut       </option>
+                        <option value='H'  >Uur          </option>
+                        <option value='D'  >Dag          </option>
+                        <option value='W'  >Week         </option>
+                        <option value='MA' >Maand        </option>
+                        <option value='Q'  >Kwartaal     </option>
+                        <option value='Y'  >Jaar         </option>
+                        <option value='DE' >Decennium    </option>
+                        <option value='C'  >Eeuw         </option>
+                        <option value='MIL'>Millenium    </option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type='number' id='input' placeholder='Waarde' step='1' style='width:100%;'></input>
+                </td>
+                <td>
+                    <div style='padding:5px; border-radius:5px; background-color:#1A1E23;height:100%;'>
+                        <center>
+                            <div style='background-color: #ff7a14; max-width:80px; height: 32px;
+                            clip-path: polygon(0 35%, 60% 35%, 60% 0%, 100% 50%, 60% 100%, 60% 65%, 0 65%);'></div>
+                        </center>
+                    </div>
+                </td>
+                <td>
+                    <input type='number' id='output' placeholder='Waarde' step='0' style='width:100%;'></input>
+                </td>
+            </tr>
+        </table>
+
+    {% endcall %}
+    {% call card(wrapperClass='small') %}
+    <div class='results'>
+
+        <div>
+            <table class='results'>
+                <tr>
+                    <td>Milliseconde</td>
+                    <td id='MS'>0</td>
+                    <td>Maand</td>
+                    <td id='MA'>0</td>
+                </tr>
+                <tr>
+                    <td>Seconde</td>
+                    <td id='S'>0</td>
+                    <td>Kwartaal</td>
+                    <td id='Q'>0</td>
+                </tr>
+                <tr>
+                    <td>Minuut</td>
+                    <td id='MI'>0</td>
+                    <td>Jaar</td>
+                    <td id='Y'>0</td>
+                </tr>
+                <tr>
+                    <td>Uur</td>
+                    <td id='H'>0</td>
+                    <td>Decennium</td>
+                    <td id='DE'>0</td>
+                </tr>
+                <tr>
+                    <td>Dag</td>
+                    <td id='D'>0</td>
+                    <td>Eeuw</td>
+                    <td id='C'>0</td>
+                </tr>
+                <tr>
+                    <td>Week</td>
+                    <td id='W'>0</td>
+                    <td>Millenium</td>
+                    <td id='MIL'>0</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+    {% endcall %}
+{% endcall %}
+
+
+{% endblock %}

@@ -1,0 +1,134 @@
+{% extends "page_base.html" %}
+
+{% set pagetitle = 'Snelheid omrekenen' %}
+
+{% block head %}
+<script>
+var precision= 3;
+
+function Calculate(){
+    var inputType = document.getElementById('typeIn').value;
+    var outputType= document.getElementById('typeOut').value;
+    var input     = document.getElementById('input').value;
+    var output = 0;
+    if (inputType=='MM') {output = input/10;}
+    if (inputType=='CM') {output = input*1;}
+    if (inputType=='DM') {output = input*10;}
+    if (inputType=='ME') {output = input*100;}
+    if (inputType=='DAM'){output = input*1000;}
+    if (inputType=='HM') {output = input*10000;}
+    if (inputType=='KM') {output = input*100000;}
+    if (inputType=='I')  {output = input*2.54;}
+    if (inputType=='F')  {output = input*30.48;}
+    if (inputType=='Y')  {output = input*91.44;}
+    if (inputType=='R')  {output = input*502.9;}
+    if (inputType=='MI') {output = input*160934.4;}
+
+    if (outputType=='MM') {output = output*10;}
+    if (outputType=='CM') {output = output;}
+    if (outputType=='DM') {output = output/10;}
+    if (outputType=='ME') {output = output/100;}
+    if (outputType=='DAM'){output = output/1000;}
+    if (outputType=='HM') {output = output/10000;}
+    if (outputType=='KM') {output = output/100000;}
+
+    if (outputType=='I'||outputType=='F'||outputType=='Y'||outputType=='R'||outputType=='MI'){
+        if (inputType=='MM'||inputType=='CM'||inputType=='DM'||inputType=='ME'||inputType=='DAM'||inputType=='HM'||inputType=='KM'){
+            output = output/2.54;
+        }
+        else {
+            if (inputType=='I') {output = input;}
+            if (inputType=='F') {output = input*12;}
+            if (inputType=='Y') {output = input*36;}
+            if (inputType=='R') {output = input*198;}
+            if (inputType=='MI'){output = input*63360;}
+        }
+        if (outputType=='F') {output = output/12;}
+        if (outputType=='Y') {output = output/36;}
+        if (outputType=='R') {output = output/198;}
+        if (outputType=='MI'){output = output/63360;}
+    }
+
+
+    document.getElementById('output').value = output.toFixed(precision);
+
+
+}
+</script>
+{% endblock %}
+
+{% block content %}
+
+{% call row(id='row') %}
+    {% call card(id='result') %}
+
+        <table style='width:100%;'>
+            <tr>
+                <td style='width: 35%;'>
+                    <select id='typeIn' style='width:50%'>
+                        <option value='MM' >Millimeter</option>
+                        <option value='CM' >Centimeter</option>
+                        <option value='DM' >Decimeter</option>
+                        <option value='ME' >Meter</option>
+                        <option value='DAM'>Decameter</option>
+                        <option value='HM' >Hectometer</option>
+                        <option value='KM' >Kilometer</option>
+                        <option value='I'  >Inch</option>
+                        <option value='F'  >Foot</option>
+                        <option value='Y'  >Yard</option>
+                        <option value='R'  >Rod</option>
+                        <option value='MI' >Mile</option>
+                    </select><select id='timeTypeIn' style='width:50%'>
+
+                    </select>
+                </td>
+
+                <td style='width: 30%;'>
+                    <center>
+                        <button onclick='Calculate()'>Omrekenen</button>
+                    </center>
+                </td>
+
+                <td style='width: 35%;'>
+                    <select id='typeOut' style='width:50%'>
+                        <option value='MM' >Millimeter</option>
+                        <option value='CM' >Centimeter</option>
+                        <option value='DM' >Decimeter</option>
+                        <option value='ME' >Meter</option>
+                        <option value='DAM'>Decameter</option>
+                        <option value='HM' >Hectometer</option>
+                        <option value='KM' >Kilometer</option>
+                        <option value='I'  >Inch</option>
+                        <option value='F'  >Foot</option>
+                        <option value='Y'  >Yard</option>
+                        <option value='R'  >Rod</option>
+                        <option value='MI' >Mile</option>
+                    </select><select id='timeTypeOut' style='width:50%'>
+
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type='number' id='input' placeholder='Waarde' style='width:100%;'></input>
+                </td>
+                <td>
+                    <div style='padding:5px; border-radius:5px; background-color:#1A1E23;height:100%;'>
+                        <center>
+                            <div style='background-color: #ff7a14; max-width:80px; height: 32px;
+                            clip-path: polygon(0 35%, 60% 35%, 60% 0%, 100% 50%, 60% 100%, 60% 65%, 0 65%);'></div>
+                        </center>
+                    </div>
+                </td>
+                <td>
+                    <input type='number' id='output' placeholder='Waarde' style='width:100%;'></input>
+                </td>
+            </tr>
+        </table>
+
+    {% endcall %}
+{% endcall %}
+
+
+{% endblock %}

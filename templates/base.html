@@ -1,0 +1,144 @@
+{%- macro card(style='',class='',id='', wrapperStyle='', wrapperClass='', wrapperId='') -%}
+<div class='wrapper {{wrapperClass}}'{%if wrapperStyle%}style='{{wrapperStyle}}'{%endif%}{%if wrapperId%}id='{{wrapperId}}'{%endif%}>
+    <div class='card {{class}}' {%if style%}style='{{style}}'{%endif%} {%if id%}id='{{id}}'{%endif%}>
+        {{ caller() }}
+    </div>
+</div>
+{%- endmacro -%}
+
+{%- macro button(url, style='', wrapperStyle='') -%}
+<div class='wrapper' {%if wrapperStyle%}style='{{wrapperStyle}}'{%endif%}>
+    <div class='card' {%if style%}style='{{style}}'{%endif%} onclick='window.location="{{url}}"'>
+        {{ caller() }}
+    </div>
+</div>
+{%- endmacro -%}
+
+{%- macro itemContainerItem(category='', page='', url='', img='') -%}
+    <div class='item'>
+        <div class='wrapper'>
+            <div onclick='javascript:window.location="{%if url%}{{url}}{%else%}{{category}}/{{page}}{%endif%}"'>
+                <img src='/static/img/{%if img%}{{img}}{%else%}{{category}}/{{page}}.svg{%endif%}'>
+                {% if caller() %}
+                    <div>
+                        <p>
+                            {{caller()}}
+                        </p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{%- endmacro -%}
+
+{%- macro row(class='', id='') -%}
+<div class='row {{class}}' {%if id%}id='{{id}}'{%endif%}>
+    {{ caller() }}
+</div>
+{%- endmacro -%}
+
+{%- macro GridCalculateItem(title) -%}
+    <div>
+        <div>
+            <center>
+                <h2>{{title}}</h2>
+            </center>
+            {{ caller() }}
+            <br><br>
+        </div>
+        <div>
+            <button onclick='{{title}}();'>Bereken</button>
+            <input readonly type='text' id='{{title}}'>
+        </div>
+    </div>
+{%- endmacro -%}
+{% block html %}
+<!DOCTYPE html>
+<html>
+    <head>
+
+        {% block head %}
+        {% endblock %}
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="{{pagetitle}} - Casper den Haan">
+        <title>{{pagetitle}} - Casper den Haan</title>
+
+        <link rel="stylesheet" type = "text/css" href = "/static/css/Stylesheet.css"/>
+        <link rel="stylesheet" type = "text/css" href = "/static/css/Animations.css"/>
+        <link rel="icon" type="image/png" href="/static/img/Logo.png">
+    </head>
+
+
+    <body onload='{%block onload%}{%endblock%}'>
+        <div class='LBar'>
+            {% call card() %}
+                <div class='logo' onclick='javascript:window.location="/"'>
+                    <!--<img src='/static/img/Logo.svg' width='200px'>-->
+                    <div class='CBL'></div>
+                    <div class='CTL'></div>
+                    <div class='RML'></div>
+                    <div class='CBR'></div>
+                    <div class='CTR'></div>
+                    <div class='RMR'></div>
+                    <div class='RMM'></div>
+                    <div class='RMB'></div>
+                </div>
+            {% endcall %}
+
+            {% call card(id='conBarList', wrapperId='conBarListWrapper') %}
+
+                {% for category in Pages %}
+
+                    <div class='navSection'>
+                        <div class='card' onclick='javascript:window.location="/{{category[0]}}"'>
+                            <p>{{category[0]}}</p>
+                        </div>
+
+                        {% for page in category[1] %}
+                            <button onclick='javascript:window.location="/{{category[0]}}/{{page}}"'>
+                                {{ page }}
+                            </button>
+                        {% endfor %}
+                    </div>
+
+                {% endfor %}
+
+            {% endcall %}
+        </div>
+        <div class='RBar'>
+
+            {% call card(id='navBar', wrapperId='navBarWrapper') %}
+
+                {% for category in Pages %}
+                    <div>
+                        <button>{{category[0]}}</button>
+                        <div>
+                            {% for page in category[1] %}
+                                <a onclick='javascript:window.location="/{{category[0]}}/{{page}}"'>{{page}}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endcall %}
+
+            {% if pagetitle %}
+                {% call card() %}
+                    <center>
+                        <h1>{{pagetitle}}</h1>
+                    </center>
+                {% endcall %}
+            {% endif %}
+
+            {% block content %}
+            {% endblock %}
+        </div>
+        <div class='footer'>
+            {% block footer %}
+            {% endblock %}
+        </div>
+    </body>
+
+</html>
+
+{% endblock %}

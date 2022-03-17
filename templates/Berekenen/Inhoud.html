@@ -1,0 +1,103 @@
+{% extends 'page_base.html' %}
+
+{% set pagetitle = 'Inhoud berekenen' %}
+
+{% block head %}
+    <script>
+
+        var pi = 3.14159265359;
+
+        function Kubus() {
+            var rib = document.getElementById('K_R').value;
+            var inh = rib*rib*rib;
+            document.getElementById('Kubus').value = inh + '³';
+        }
+
+        function Balk() {
+            var lengte  = document.getElementById('B_L').value;
+            var breedte = document.getElementById('B_B').value;
+            var hoogte  = document.getElementById('B_H').value;
+            var inh = lengte*breedte*hoogte;
+            document.getElementById('Balk').value = inh + '³';
+        }
+
+        function Bol() {
+            var radius = document.getElementById('B_R').value;
+            var inh = ((1/3)*4)*pi*radius*radius*radius;
+            document.getElementById('Bol').value = inh + '³';
+        }
+
+        function Prisma() {
+            var grondvlak = document.getElementById('Pr_G').value;
+            var hoogte    = document.getElementById('Pr_H').value;
+            var inh = grondvlak*hoogte;
+            document.getElementById('Prisma').value = inh + '³';
+        }
+
+        function Piramide() {
+            var grondvlak = document.getElementById('Pi_G').value;
+            var hoogte    = document.getElementById('Pi_H').value;
+            var inh = grondvlak*hoogte*(1/3);
+            document.getElementById('Piramide').value = inh + '³';
+        }
+
+        function Kegel() {
+            var radius = document.getElementById('K_R').value;
+            var hoogte = document.getElementById('K_H').value;
+            var inh = pi*radius*radius*hoogte*(1/3);
+            document.getElementById('Kegel').value = inh + '³';
+        }
+
+    </script>
+{% endblock %}
+
+{% block content %}
+
+    {% call card() %}
+    <button onclick='window.location="/Omrekenen/Afstanden"' style='float:right;'>Afstanden omrekenen</button>
+    <p style='margin-bottom: 0px'>Let er op dat alle waardes die bij een formule worden ingevuld van hetzelfde formaat zijn.
+    Afstanden omreken kan worden gebruikt om ze naar hetzelfde formaat te krijgen.
+    Als er een waarde in Meter wordt ingevuld, is de uitkomst ook in Meter³</p>
+    {% endcall %}
+
+    <div class='Grid3 GridCalculate'>
+        {% call card() %}
+            {% call GridCalculateItem('Kubus') %}
+                <input id='K_R' type='number' placeholder='Lengte of Breedte of Hoogte'>
+            {% endcall %}
+        {% endcall %}
+        {% call card() %}
+            {% call GridCalculateItem('Balk') %}
+                <input id='B_L' type='number' placeholder='Lengte'>
+                <input id='B_B' type='number' placeholder='Breedte'>
+                <input id='B_H' type='number' placeholder='Hoogte'>
+            {% endcall %}
+        {% endcall %}
+        {% call card() %}
+            {% call GridCalculateItem('Bol') %}
+                <input id='B_R' type='number' placeholder='Radius'>
+            {% endcall %}
+        {% endcall %}
+
+
+        {% call card() %}
+            {% call GridCalculateItem('Prisma') %}
+                <input id='Pr_G' type='number' placeholder='Grondoppervlakte'>
+                <input id='Pr_H' type='number' placeholder='Hoogte'>
+            {% endcall %}
+        {% endcall %}
+        {% call card() %}
+            {% call GridCalculateItem('Piramide') %}
+                <input id='Pi_G' type='number' placeholder='Grondoppervlakte'>
+                <input id='Pi_H' type='number' placeholder='Hoogte'>
+            {% endcall %}
+        {% endcall %}
+        {% call card() %}
+            {% call GridCalculateItem('Kegel') %}
+                <input id='K_R' type='number' placeholder='Radius'>
+                <input id='K_H' type='number' placeholder='Hoogte'>
+            {% endcall %}
+        {% endcall %}
+    </div>
+
+{% endblock %}

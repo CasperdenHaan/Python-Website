@@ -1,0 +1,223 @@
+{% extends 'page_base.html' %}
+
+{% set pagetitle = 'Stroom berekenen' %}
+{# https://www.rapidtables.com/calc/electric/watt-volt-amp-calculator.html #}
+
+{% block head %}
+    <script>
+        var last = [];
+        function Leeg(){
+            document.getElementById('V').value = "";
+            document.getElementById('A').value = "";
+            document.getElementById('O').value = "";
+            document.getElementById('W').value = "";
+            last = [];
+        }
+        function setLast(value){
+            if (!document.getElementById(value).value == ""){
+                last.push(value);
+                if (last.length > 2){
+                    last.shift();
+                }
+            }
+        }
+
+        function Calc(){
+
+            var Volt = document.getElementById("V").value;
+            var Amp  = document.getElementById("A").value;
+            var Ohm  = document.getElementById("O").value;
+            var Watt = document.getElementById("W").value;
+
+            var filled = [];
+            if (Volt != ""){filled.push("V");}
+            if (Amp  != ""){filled.push("A");}
+            if (Ohm  != ""){filled.push("O");}
+            if (Watt != ""){filled.push("W");}
+            console.log(filled);
+
+            var VS = document.getElementById('VS').value;
+            var AS = document.getElementById('AS').value;
+            var OS = document.getElementById('OS').value;
+            var WS = document.getElementById('WS').value;
+
+            if ((last.length == 2) && (filled.length >= 2)){
+
+                if (VS == 'Mi'){Volt = Volt / 1000000}
+                if (VS == 'Ml'){Volt = Volt / 1000}
+                if (VS == 'Ki'){Volt = Volt * 1000}
+                if (VS == 'Me'){Volt = Volt * 1000000}
+
+                if (AS == 'Mi'){Amp = Amp / 1000000}
+                if (AS == 'Ml'){Amp = Amp / 1000}
+                if (AS == 'Ki'){Amp = Amp * 1000}
+                if (AS == 'Me'){Amp = Amp * 1000000}
+
+                if (OS == 'Mi'){Ohm = Ohm / 1000000}
+                if (OS == 'Ml'){Ohm = Ohm / 1000}
+                if (OS == 'Ki'){Ohm = Ohm * 1000}
+                if (OS == 'Me'){Ohm = Ohm * 1000000}
+
+                if (WS == 'Mi'){Watt = Watt / 1000000}
+                if (WS == 'Ml'){Watt = Watt / 1000}
+                if (WS == 'Ki'){Watt = Watt * 1000}
+                if (WS == 'Me'){Watt = Watt * 1000000}
+
+                // Volt is empty
+                if ( (!filled.includes('V')) || (filled.includes('V') && !last.includes('V')) ){
+                    if (filled.includes('A')&&filled.includes('O')){
+                        Volt = Amp*Ohm;
+                    }
+                    else if (filled.includes("W")&&filled.includes("A")){
+                        Volt = Watt/Amp;
+                    }
+                    else {
+                        Volt = Math.sqrt(Watt*Ohm);
+                    }
+                }
+
+                // Amp is empty
+                if ( (!filled.includes('A')) || (filled.includes('A') && !last.includes('A')) ){
+                    if (filled.includes('V')&&filled.includes('O')){
+                        Amp = Volt/Ohm;
+                    }
+                    else if (filled.includes('W')&&filled.includes('V')){
+                        Amp = Watt/Volt;
+                    }
+                    else {
+                        Amp = Math.sqrt(Watt/Ohm);
+                    }
+                }
+
+                // Ohm is empty
+                if ( (!filled.includes('O')) || (filled.includes('O') && !last.includes('O')) ){
+                    if (filled.includes('V')&&filled.includes('A')){
+                        Ohm = Volt/Amp;
+                    }
+                    else if (filled.includes('V')&&filled.includes('W')){
+                        Ohm = (Volt*Volt) / Watt;
+                    }
+                    else {
+                        Ohm = Watt / (Amp*Amp);
+                    }
+                }
+
+                // Watt is empty
+                if ( (!filled.includes('W')) || (filled.includes('W') && !last.includes('W')) ){
+                    if (filled.includes('V')&&filled.includes('A')){
+                        Watt = Volt*Amp;
+                    }
+                    else if (filled.includes('V')&&filled.includes('O')){
+                        Watt = (Volt*Volt)/Ohm;
+                    }
+                    else {
+                        Watt = Amp * Amp * Ohm;
+                    }
+                }
+
+                if      (VS == 'Vo'){}
+                else if (VS == 'Mi'){Volt = Volt * 1000000}
+                else if (VS == 'Ml'){Volt = Volt * 1000}
+                else if (VS == 'Ki'){Volt = Volt / 1000}
+                else if (VS == 'Me'){Volt = Volt / 1000000}
+
+                if      (AS == 'Am'){}
+                else if (AS == 'Mi'){Amp = Amp * 1000000}
+                else if (AS == 'Ml'){Amp = Amp * 1000}
+                else if (AS == 'Ki'){Amp = Amp / 1000}
+                else if (AS == 'Me'){Amp = Amp / 1000000}
+
+                if      (OS == 'Oh'){}
+                else if (OS == 'Mi'){Ohm = Ohm * 1000000}
+                else if (OS == 'Ml'){Ohm = Ohm * 1000}
+                else if (OS == 'Ki'){Ohm = Ohm / 1000}
+                else if (OS == 'Me'){Ohm = Ohm / 1000000}
+
+                if      (WS == 'Wa'){}
+                else if (WS == 'Mi'){Watt = Watt * 1000000}
+                else if (WS == 'Ml'){Watt = Watt * 1000}
+                else if (WS == 'Ki'){Watt = Watt / 1000}
+                else if (WS == 'Me'){Watt = Watt / 1000000}
+
+                document.getElementById('V').value = Volt;
+                document.getElementById('A').value = Amp;
+                document.getElementById('O').value = Ohm;
+                document.getElementById('W').value = Watt;
+
+            }
+            else {
+                alert('Voer minimaal 2 velden in');
+            }
+
+
+            console.log(Volt, Amp, Ohm, Watt);
+        }
+    </script>
+{% endblock %}
+
+{% block content %}
+
+    {% call card() %}
+        <center>
+            <h2>Volt, Amp, Ohm, Watt</h2>
+            <p>Vul 2 waardes in om alle andere te berekenen.</p>
+        </center>
+        <center>
+            <div style='display:grid; grid-template-columns: min-content min-content min-content auto; width: min-content; text-align:left;'>
+                <p>Spanning </p>
+                <p>[V] </p>
+                <select id='VS' onchange='setLast("V")'>
+                    <option value='Mi'         >Microvolt</option>
+                    <option value='Ml'         >Millivolt</option>
+                    <option value='Vo' selected>Volt     </option>
+                    <option value='Ki'         >Kilovolt </option>
+                    <option value='Me'         >Megavolt </option>
+                </select>
+                <input type='number' placeholder='Value' id='V' onchange='setLast("V")'>
+
+                <p>Stroomsterkte </p>
+                <p>[I] </p>
+                <select id='AS' onchange='setLast("A")'>
+                    <option value='Mi'         >Microampère</option>
+                    <option value='Ml'         >Milliampere</option>
+                    <option value='Am' selected>Ampère     </option>
+                    <option value='Ki'         >Kiloampère </option>
+                    <option value='Me'         >Mega-ampère</option>
+                </select>
+                <input type='number' placeholder='Value' id='A' onchange='setLast("A")'>
+
+                <p>Weerstand </p>
+                <p>[R] </p>
+                <select id='OS' onchange='setLast("O onchange='setLast("W")'")'>
+                    <option value='Mi'         >Micro-ohm</option>
+                    <option value='Ml'         >Milliohm </option>
+                    <option value='Oh' selected>Ohm      </option>
+                    <option value='Ki'         >Kiloohm  </option>
+                    <option value='Me'         >Megaohm  </option>
+                </select>
+                <input type='number' placeholder='Value' id='O' onchange='setLast("O")'>
+
+                <p>Engergie</p>
+                <p>[P] </p>
+                <select id='WS' onchange='setLast("W")'>
+                    <option value='Mi'         >Microwatt</option>
+                    <option value='Ml'         >Milliwatt</option>
+                    <option value='Wa' selected>Watt     </option>
+                    <option value='Ki'         >Kilowatt </option>
+                    <option value='Me'         >Megawatt </option>
+                </select>
+                <input type='number' placeholder='Value' id='W' onchange='setLast("W")'>
+
+                <div>
+                    <button onclick='Calc()'>Bereken</button>
+                </div>
+                <p></p>
+                <p></p>
+                <div>
+                    <button style='float:right' onclick='Leeg()'>Leeg</button>
+                </div>
+            </div>
+        </center>
+    {% endcall %}
+
+{% endblock %}

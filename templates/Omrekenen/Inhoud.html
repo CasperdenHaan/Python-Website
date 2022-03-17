@@ -1,0 +1,270 @@
+{% extends "page_base.html" %}
+
+{% set pagetitle = 'Inhoud omrekenen' %}
+
+{% block head %}
+<script>
+var precision= 3;
+
+function Calculate(){
+    var inputType = document.getElementById('typeIn').value;
+    var outputType= document.getElementById('typeOut').value;
+    var input     = document.getElementById('input').value;
+    var output = input;
+
+    if (inputType=='MM') {output = input/1000;}
+    if (inputType=='CM') {output = input*1;}
+    if (inputType=='DM') {output = input*1000;}
+    if (inputType=='ME') {output = input*1000000;}
+    if (inputType=='DAM'){output = input*1000000000;}
+    if (inputType=='HM') {output = input*1000000000000;}
+    if (inputType=='KM') {output = input*1000000000000000;}
+
+    if (inputType=='ML') {output = input*1;}
+    if (inputType=='CL') {output = input*10;}
+    if (inputType=='DL') {output = input*100;}
+    if (inputType=='LI') {output = input*1000;}
+    if (inputType=='DAL'){output = input*10000;}
+    if (inputType=='HL') {output = input*100000;}
+    if (inputType=='KL') {output = input*1000000;}
+
+    if (inputType=='I')  {output = input*(2.54*2.54*2.54);}
+    if (inputType=='F')  {output = input*(30.48*30.48*30.48);}
+    if (inputType=='Y')  {output = input*(91.44*91.44*91.44);}
+    if (inputType=='AF') {output = input*1233000000;}
+
+    document.getElementById('MM').innerHTML = (output*1000).toFixed(precision);
+    document.getElementById('CM').innerHTML = (output*1).toFixed(precision);
+    document.getElementById('DM').innerHTML = (output/1000).toFixed(precision);
+    document.getElementById('ME').innerHTML = (output/1000000).toFixed(precision);
+    document.getElementById('DAM').innerHTML= (output/1000000000).toFixed(precision);
+    document.getElementById('HM').innerHTML = (output/1000000000000).toFixed(precision);
+    document.getElementById('KM').innerHTML = (output/1000000000000000).toFixed(precision);
+
+    document.getElementById('ML').innerHTML = (output/1).toFixed(precision);
+    document.getElementById('CL').innerHTML = (output/10).toFixed(precision);
+    document.getElementById('DL').innerHTML = (output/100).toFixed(precision);
+    document.getElementById('LI').innerHTML = (output/1000).toFixed(precision);
+    document.getElementById('DAL').innerHTML= (output/10000).toFixed(precision);
+    document.getElementById('HL').innerHTML = (output/100000).toFixed(precision);
+    document.getElementById('KL').innerHTML = (output/1000000).toFixed(precision);
+
+    document.getElementById('I').innerHTML  = (output/(2.54*2.54*2.54)).toFixed(precision);
+    document.getElementById('F').innerHTML  = (output/(30.48*30.48*30.48)).toFixed(precision);
+    document.getElementById('Y').innerHTML  = (output/(91.44*91.44*91.44)).toFixed(precision);
+    document.getElementById('AF').innerHTML = (output/1233000000).toFixed(precision);
+
+    if (outputType=='MM') {output = output*1000;}
+    if (outputType=='DM') {output = output/1000;}
+    if (outputType=='ME') {output = output/1000000;}
+    if (outputType=='DAM'){output = output/1000000000;}
+    if (outputType=='HM') {output = output/1000000000000;}
+    if (outputType=='KM') {output = output/1000000000000000;}
+
+    if (outputType=='ML') {output = output/1;}
+    if (outputType=='CL') {output = output/10;}
+    if (outputType=='DL') {output = output/100;}
+    if (outputType=='LI') {output = output/1000;}
+    if (outputType=='DAL'){output = output/10000;}
+    if (outputType=='HL') {output = output/100000;}
+    if (outputType=='KL') {output = output/1000000;}
+
+    if (outputType=='I'||outputType=='F'||outputType=='Y'){
+        if (inputType=='MM'||inputType=='CM'||inputType=='DM'||inputType=='ME'||inputType=='DAM'||inputType=='HM'||inputType=='KM'){
+            output = output/(2.54*2.54);
+        }
+        else {
+            if (inputType=='I') {output = (input);}
+            if (inputType=='F') {output = (input*(12*12*12));}
+            if (inputType=='Y') {output = (input*(36*36*36));}
+        }
+        document.getElementById('I').innerHTML = (output).toFixed(precision);
+        document.getElementById('F').innerHTML = (output/(12*12*12)).toFixed(precision);
+        document.getElementById('Y').innerHTML = (output/(36*36*36)).toFixed(precision);
+        if (outputType=='F') {output = output/(12*12*12);}
+        if (outputType=='Y') {output = output/(36*36*36);}
+    }
+
+    document.getElementById('output').value = output;
+
+
+}
+</script>
+{% endblock %}
+
+{% block content %}
+
+{% call row(id='row') %}
+    {% call card(id='result') %}
+
+        <table style='width:100%;'>
+            <tr>
+                <td style='width: 35%;'>
+                    <select id='typeIn' style='width:100%' onchange='Calculate();'>
+                        <option value='MM' >Kubieke millimeter</option>
+                        <option value='CM' >Kubieke centimeter</option>
+                        <option value='DM' >Kubike decimeter</option>
+                        <option value='ME' >Kubieke meter</option>
+                        <option value='DAM'>Kubieke decameter</option>
+                        <option value='HM' >Kubieke hectometer</option>
+                        <option value='KM' >Kubieke kilometer</option>
+                        <option value='ML' >Milliliter</option>
+                        <option value='DL' >Deciliter</option>
+                        <option value='LI' >Liter</option>
+                        <option value='DAL'>Decaliter</option>
+                        <option value='HL' >Hectoliter</option>
+                        <option value='KL' >Kiloliter</option>
+                        <option value='I'  >Cubic inch</option>
+                        <option value='F'  >Cubic foot</option>
+                        <option value='Y'  >Cubic yard</option>
+                        <option value='AF' >Acre-foot</option>
+                    </select>
+                </td>
+
+                <td style='width: 30%;'>
+                    <center>
+                        <button onclick='Calculate();'>Omrekenen</button>
+                    </center>
+                </td>
+
+                <td style='width: 35%;'>
+                    <select id='typeOut' style='width:100%' onchange='Calculate();'>
+                        <option value='MM' >Kubieke millimeter</option>
+                        <option value='CM' >Kubieke centimeter</option>
+                        <option value='DM' >Kubieke decimeter</option>
+                        <option value='ME' >Kubieke meter</option>
+                        <option value='DAM'>Kubieke decameter</option>
+                        <option value='HM' >Kubieke hectometer</option>
+                        <option value='KM' >Kubieke kilometer</option>
+                        <option value='ML' >Milliliter</option>
+                        <option value='DL' >Deciliter</option>
+                        <option value='LI' >Liter</option>
+                        <option value='DAL'>Decaliter</option>
+                        <option value='HL' >Hectoliter</option>
+                        <option value='KL' >Kiloliter</option>
+                        <option value='I'  >Cubic inch</option>
+                        <option value='F'  >Cubic foot</option>
+                        <option value='Y'  >Cubic yard</option>
+                        <option value='AF' >Acre-foot</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type='number' id='input' placeholder='Waarde' style='width:100%;'></input>
+                </td>
+                <td>
+                    <div style='padding:5px; border-radius:5px; background-color:#1A1E23;height:100%;'>
+                        <center>
+                            <div style='background-color: #ff7a14; max-width:80px; height: 32px;
+                            clip-path: polygon(0 35%, 60% 35%, 60% 0%, 100% 50%, 60% 100%, 60% 65%, 0 65%);'></div>
+                        </center>
+                    </div>
+                </td>
+                <td>
+                    <input type='number' id='output' placeholder='Waarde' style='width:100%;'></input>
+                </td>
+            </tr>
+        </table>
+
+    {% endcall %}
+    {% call card(wrapperClass='small') %}
+    <div class='results'>
+
+        <div>
+            <p>Metrisch (Meter)</p>
+            <table class='results'>
+                <tr>
+                    <td>MM³</td>
+                    <td id='MM'>0.000</td>
+                </tr>
+                <tr>
+                    <td>CM³</td>
+                    <td id='CM'>0.000</td>
+                </tr>
+                <tr>
+                    <td>DM³</td>
+                    <td id='DM'>0.000</td>
+                </tr>
+                <tr>
+                    <td>M³</td>
+                    <td id='ME'>0.000</td>
+                </tr>
+                <tr>
+                    <td>DAM³</td>
+                    <td id='DAM'>0.000</td>
+                </tr>
+                <tr>
+                    <td>HM³</td>
+                    <td id='HM'>0.000</td>
+                </tr>
+                <tr>
+                    <td>KM³</td>
+                    <td id='KM'>0.000</td>
+                </tr>
+            </table>
+        </div>
+
+        <div>
+            <p>Metrisch (Liter)</p>
+            <table class='results'>
+                <tr>
+                    <td>ML</td>
+                    <td id='ML'>0.000</td>
+                </tr>
+                <tr>
+                    <td>CL</td>
+                    <td id='CL'>0.000</td>
+                </tr>
+                <tr>
+                    <td>DL</td>
+                    <td id='DL'>0.000</td>
+                </tr>
+                <tr>
+                    <td>L</td>
+                    <td id='LI'>0.000</td>
+                </tr>
+                <tr>
+                    <td>DAL</td>
+                    <td id='DAL'>0.000</td>
+                </tr>
+                <tr>
+                    <td>HL</td>
+                    <td id='HL'>0.000</td>
+                </tr>
+                <tr>
+                    <td>KL</td>
+                    <td id='KL'>0.000</td>
+                </tr>
+            </table>
+        </div>
+
+        <div>
+            <p>Imperiaal</p>
+            <table>
+                <tr>
+                    <td>Cubic Inch</td>
+                    <td id='I'>0.000</td>
+                </tr>
+                <tr>
+                    <td>Cubic Foot</td>
+                    <td id='F'>0.000</td>
+                </tr>
+                <tr>
+                    <td>Cubic Yord</td>
+                    <td id='Y'>0.000</td>
+                </tr>
+                <tr>
+                    <td>Acre-foot</td>
+                    <td id='AF'>0.000</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+    {% endcall %}
+{% endcall %}
+
+
+{% endblock %}

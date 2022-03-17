@@ -1,0 +1,119 @@
+{% extends "page_base.html" %}
+
+{% set pagetitle = 'Temperatuur omrekenen' %}
+
+{% block head %}
+<script>
+var precision= 3;
+
+function Calculate(){
+    var inputType = document.getElementById('typeIn').value;
+    var outputType= document.getElementById('typeOut').value;
+    var input     = document.getElementById('input').value;
+    var output = 0;
+
+    if (inputType=='CE') {output = input*1;}
+    if (inputType=='FA') {output = (input-32)/1.8;}
+    if (inputType=='KE') {output = input-273,15;}
+    if (inputType=='NE') {output = input*(100/33);}
+
+    document.getElementById('CE').innerHTML =  output.toFixed(precision);
+    document.getElementById('FA').innerHTML =  ((output*(9/5))+32).toFixed(precision);
+    document.getElementById('KE').innerHTML =  (output+273.15).toFixed(precision);
+    document.getElementById('NE').innerHTML =  (output*(100/33)).toFixed(precision);
+
+    if (outputType=='CE') {output = output;}
+    if (outputType=='FA') {output = (output*1.8)+32;}
+    if (outputType=='KE') {output = output+273.15;}
+    if (outputType=='NE') {output = output*(100/33);}
+
+    document.getElementById('output').value = output.toFixed(precision);
+
+
+
+}
+</script>
+{% endblock %}
+
+{% block content %}
+
+{% call row(id='row') %}
+    {% call card(id='result') %}
+
+        <table style='width:100%;'>
+            <tr>
+                <td style='width: 35%;'>
+                    <select id='typeIn' style='width:100%'>
+                        <option value='CE' >Celsius</option>
+                        <option value='FA' >Fahrenheit</option>
+                        <option value='KE' >Kelvin</option>
+                        <option value='NE' >Newton</option>
+                    </select>
+                </td>
+
+                <td style='width: 30%;'>
+                    <center>
+                        <button onclick='Calculate()'>Omrekenen</button>
+                    </center>
+                </td>
+
+                <td style='width: 35%;'>
+                    <select id='typeOut' style='width:100%'>
+                        <option value='CE' >Celsius</option>
+                        <option value='FA' >Fahrenheit</option>
+                        <option value='KE' >Kelvin</option>
+                        <option value='NE' >Newton</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type='number' id='input' placeholder='Waarde' style='width:100%;'></input>
+                </td>
+                <td>
+                    <div style='padding:5px; border-radius:5px; background-color:#1A1E23;height:100%;'>
+                        <center>
+                            <div style='background-color: #ff7a14; max-width:80px; height: 32px;
+                            clip-path: polygon(0 35%, 60% 35%, 60% 0%, 100% 50%, 60% 100%, 60% 65%, 0 65%);'></div>
+                        </center>
+                    </div>
+                </td>
+                <td>
+                    <input type='number' id='output' placeholder='Waarde' style='width:100%;'></input>
+                </td>
+            </tr>
+        </table>
+
+    {% endcall %}
+    {% call card(wrapperClass='small') %}
+    <div class='results'>
+
+        <div>
+            <table class='results'>
+                <tr>
+                    <td>Celsius</td>
+                    <td id='CE'>0.000</td>
+                </tr>
+                <tr>
+                    <td>Fahrenheit</td>
+                    <td id='FA'>0.000</td>
+                </tr>
+                <tr>
+                    <td>Kelvin</td>
+                    <td id='KE'>0.000</td>
+                </tr>
+                <tr>
+                    <td>Newton</td>
+                    <td id='NE'>0.000</td>
+                </tr>
+            </table>
+        </div>
+
+
+    </div>
+    {% endcall %}
+{% endcall %}
+
+
+{% endblock %}

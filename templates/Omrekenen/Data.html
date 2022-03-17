@@ -1,0 +1,253 @@
+{% extends "page_base.html" %}
+
+{% set pagetitle = 'Data omrekenen' %}
+
+{% block head %}
+<script>
+var precision= 3;
+
+function Calculate(){
+    var inputType = document.getElementById('typeIn').value;
+    var outputType= document.getElementById('typeOut').value;
+    var input     = document.getElementById('input').value;
+    var output = 0;
+
+    if (inputType=='BI') {output = input/8;}
+    if (inputType=='BY') {output = input*1;}
+    if (inputType=='KiB') {output = input*1024;}
+    if (inputType=='MiB') {output = input*1048576;}
+    if (inputType=='GiB') {output = input*1073741824;}
+    if (inputType=='TiB') {output = input*1099511627776;}
+    if (inputType=='PiB') {output = input*1125899906842624;}
+    if (inputType=='EiB') {output = input*1152921504606846974;}
+    if (inputType=='ZiB') {output = input*1180591620717411303424;}
+    if (inputType=='YiB') {output = input*1208925819614629174706176;}
+
+    if (inputType=='KB') {output = input*1000;}
+    if (inputType=='MB') {output = input*1000000;}
+    if (inputType=='GB') {output = input*1000000000;}
+    if (inputType=='TB') {output = input*1000000000000;}
+    if (inputType=='PB') {output = input*1000000000000000;}
+    if (inputType=='EB') {output = input*1000000000000000000;}
+    if (inputType=='ZB') {output = input*1000000000000000000000;}
+    if (inputType=='YB') {output = input*1000000000000000000000000;}
+
+    document.getElementById('BI').innerHTML = (output*8).toFixed(precision);
+    document.getElementById('BY').innerHTML = (output*1).toFixed(precision);
+    document.getElementById('KiB').innerHTML = (output/1024).toFixed(precision);
+    document.getElementById('MiB').innerHTML = (output/1048576).toFixed(precision);
+    document.getElementById('GiB').innerHTML = (output/1073741824).toFixed(precision);
+    document.getElementById('TiB').innerHTML = (output/1099511627776).toFixed(precision);
+    document.getElementById('PiB').innerHTML = (output/1125899906842624).toFixed(precision);
+    document.getElementById('EiB').innerHTML = (output/1152921504606846974).toFixed(precision);
+    document.getElementById('ZiB').innerHTML = (output/1180591620717411303424).toFixed(precision);
+    document.getElementById('YiB').innerHTML = (output/1208925819614629174706176).toFixed(precision);
+
+    document.getElementById('KB').innerHTML = (output/1000).toFixed(precision);
+    document.getElementById('MB').innerHTML = (output/1000000).toFixed(precision);
+    document.getElementById('GB').innerHTML = (output/1000000000).toFixed(precision);
+    document.getElementById('TB').innerHTML = (output/1000000000000).toFixed(precision);
+    document.getElementById('PB').innerHTML = (output/1000000000000000).toFixed(precision);
+    document.getElementById('EB').innerHTML = (output/1000000000000000000).toFixed(precision);
+    document.getElementById('ZB').innerHTML = (output/1000000000000000000000).toFixed(precision);
+    document.getElementById('YB').innerHTML = (output/1000000000000000000000000).toFixed(precision);
+
+    if (outputType=='BI') {output = output*8;}
+    if (outputType=='BY') {output = output*1;}
+    if (outputType=='KiB') {output = output/1024;}
+    if (outputType=='MiB') {output = output/1048576;}
+    if (outputType=='GiB') {output = output/1073741824;}
+    if (outputType=='TiB') {output = output/1099511627776;}
+    if (outputType=='PiB') {output = output/1125899906842624;}
+    if (outputType=='EiB') {output = output/1152921504606846974;}
+    if (outputType=='ZiB') {output = output/1180591620717411303424;}
+    if (outputType=='YiB') {output = output/1208925819614629174706176;}
+
+    if (outputType=='KB') {output = output/1000;}
+    if (outputType=='MB') {output = output/1000000;}
+    if (outputType=='GB') {output = output/1000000000;}
+    if (outputType=='TB') {output = output/1000000000000;}
+    if (outputType=='PB') {output = output/1000000000000000;}
+    if (outputType=='EB') {output = output/1000000000000000000;}
+    if (outputType=='ZB') {output = output/1000000000000000000000;}
+    if (outputType=='YB') {output = output/1000000000000000000000000;}
+
+    document.getElementById('output').value = output.toFixed(precision);
+
+
+
+}
+</script>
+{% endblock %}
+
+{% block content %}
+
+{% call row(id='row') %}
+    {% call card(id='result') %}
+
+        <table style='width:100%;'>
+            <tr>
+                <td style='width: 35%;'>
+                    <select id='typeIn' style='width:100%'>
+                        <option value='BI'>Bit</option>
+                        <option value='BY'>Byte</option>
+                        <option value='KB'>Kilobyte</option>
+                        <option value='MB'>Megabyte</option>
+                        <option value='GB'>Gigabyte</option>
+                        <option value='TB'>Terrabyte</option>
+                        <option value='PB'>Petabyte</option>
+                        <option value='EB'>Exabyte</option>
+                        <option value='ZB'>Zettabyte</option>
+                        <option value='YB'>Yottabyte</option>
+
+                        <option value='KiB'>Kibibyte</option>
+                        <option value='MiB'>Mebibyte</option>
+                        <option value='GiB'>Gibibyte</option>
+                        <option value='TiB'>Tebibyte</option>
+                        <option value='PiB'>Pebibyte</option>
+                        <option value='EiB'>Exbibyte</option>
+                        <option value='ZiB'>Zebibyte</option>
+                        <option value='YiB'>Yobibyte</option>
+                    </select>
+                </td>
+
+                <td style='width: 30%;'>
+                    <center>
+                        <button onclick='Calculate()'>Omrekenen</button>
+                    </center>
+                </td>
+
+                <td style='width: 35%;'>
+                    <select id='typeOut' style='width:100%'>
+                        <option value='BI'>Bit</option>
+                        <option value='BY'>Byte</option>
+                        <option value='KB'>Kilobyte</option>
+                        <option value='MB'>Megabyte</option>
+                        <option value='GB'>Gigabyte</option>
+                        <option value='TB'>Terrabyte</option>
+                        <option value='PB'>Petabyte</option>
+                        <option value='EB'>Exabyte</option>
+                        <option value='ZB'>Zettabyte</option>
+                        <option value='YB'>Yottabyte</option>
+
+                        <option value='KiB'>Kibibyte</option>
+                        <option value='MiB'>Mebibyte</option>
+                        <option value='GiB'>Gibibyte</option>
+                        <option value='TiB'>Tebibyte</option>
+                        <option value='PiB'>Pebibyte</option>
+                        <option value='EiB'>Exbibyte</option>
+                        <option value='ZiB'>Zebibyte</option>
+                        <option value='YiB'>Yobibyte</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type='number' id='input' placeholder='Waarde' step='1' style='width:100%;'></input>
+                </td>
+                <td>
+                    <div style='padding:5px; border-radius:5px; background-color:#1A1E23;height:100%;'>
+                        <center>
+                            <div style='background-color: #ff7a14; max-width:80px; height: 32px;
+                            clip-path: polygon(0 35%, 60% 35%, 60% 0%, 100% 50%, 60% 100%, 60% 65%, 0 65%);'></div>
+                        </center>
+                    </div>
+                </td>
+                <td>
+                    <input type='number' id='output' placeholder='Waarde' step='0' style='width:100%;'></input>
+                </td>
+            </tr>
+        </table>
+
+    {% endcall %}
+    {% call card(wrapperClass='small') %}
+    <div class='results'>
+
+        <div>
+            <table class='results'>
+                <tr>
+                    <td>Bit</td>
+                    <td id='BI'>0</td>
+                </tr>
+                <tr>
+                    <td>Byte</td>
+                    <td id='BY'>0</td>
+                </tr>
+                <tr>
+                    <td>Kilobyte</td>
+                    <td id='KB'>0</td>
+                </tr>
+                <tr>
+                    <td>Megabyte</td>
+                    <td id='MB'>0</td>
+                </tr>
+                <tr>
+                    <td>Gigabyte</td>
+                    <td id='GB'>0</td>
+                </tr>
+                <tr>
+                    <td>Terrabyte</td>
+                    <td id='TB'>0</td>
+                </tr>
+                <tr>
+                    <td>Petabyte</td>
+                    <td id='PB'>0</td>
+                </tr>
+                <tr>
+                    <td>Exabyte</td>
+                    <td id='EB'>0</td>
+                </tr>
+                <tr>
+                    <td>Zettabyte</td>
+                    <td id='ZB'>0</td>
+                </tr>
+                <tr>
+                    <td>Yottabyte</td>
+                    <td id='YB'>0</td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <table class='results'>
+                <tr>
+                    <td>Kibibyte</td>
+                    <td id='KiB'>0</td>
+                </tr>
+                <tr>
+                    <td>Mebibyte</td>
+                    <td id='MiB'>0</td>
+                </tr>
+                <tr>
+                    <td>Gibibyte</td>
+                    <td id='GiB'>0</td>
+                </tr>
+                <tr>
+                    <td>Tebibyte</td>
+                    <td id='TiB'>0</td>
+                </tr>
+                <tr>
+                    <td>Petibyte</td>
+                    <td id='PiB'>0</td>
+                </tr>
+                <tr>
+                    <td>Ebibyte</td>
+                    <td id='EiB'>0</td>
+                </tr>
+                <tr>
+                    <td>Zebibyte</td>
+                    <td id='ZiB'>0</td>
+                </tr>
+                <tr>
+                    <td>Yobibyte</td>
+                    <td id='YiB'>0</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+    {% endcall %}
+{% endcall %}
+
+
+{% endblock %}

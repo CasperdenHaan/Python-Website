@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% set pagetitle = 'Home' %}
+
+{% block content %}
+    <div id='homepageGrid'>
+
+        <div style='grid-area:Omrekenen;'>
+            {% call itemContainerItem(url='/Omrekenen', img='Omrekenen/Omrekenen.svg') %}Omrekenen{% endcall %}
+        </div>
+
+        <div style='grid-area:info1'>
+            {% call button('/Omrekenen', wrapperStyle='height:100%;', style='border: 2px solid #1e90ff') %}
+                <p>
+                    Klik hier voor het overzicht van alle omreken pagina's. Het is makkelijk om te gebruiken:
+                    <ul>
+                        <li>Vul een waarde in</li>
+                        <li>Kies de eenheid om om te rekenen</li>
+                        <li>Kies de eenheid van het resultaat</li>
+                        <li>Klik op <button>Omrekenen</button>!</li>
+                    </ul>
+                </p>
+            {% endcall %}
+        </div>
+        <div style='grid-area:info2'>
+            {% call button('/Berekenen', wrapperStyle='height:100%;', style='border: 2px solid #ff7a14') %}
+                <p>
+                    Klik hier voor het overzicht van alle bereken pagina's. Ze hebben allemaal een eigen uiterlijk, maar werken hetzelfde:
+                    <ul>
+                        <li>Vul een waarde / waardes in</li>
+                        <li>Klik op <button>Bereken</button>!</li>
+                    </ul>
+                </p>
+            {% endcall %}
+        </div>
+
+        <div style='grid-area:Berekenen'>
+            {% call itemContainerItem(url='/Berekenen' , img='Berekenen/Berekenen.svg') %}Berekenen{% endcall %}
+        </div>
+
+    </div>
+{% endblock %}

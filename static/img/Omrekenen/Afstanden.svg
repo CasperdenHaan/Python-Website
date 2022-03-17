@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" viewBox="0 0 500 300" width="500" height="300">
+    <defs>
+        <path d="M0 0L502 0L502 300L0 300L0 0Z" id="bYtjcj2It"></path>
+        <path d="M289.21 -52.39L379.84 -10.13L210.79 352.39L120.16 310.13L289.21 -52.39Z" id="a3DXtQ4wRA"></path>
+        <path d="M137.07 273.88L177.85 292.9L171.51 306.49L130.73 287.47L137.07 273.88Z" id="ccVKqLCWB"></path>
+        <path d="M263.85 1.99L304.64 21L298.3 34.6L257.51 15.58L263.85 1.99Z" id="eKZBdJ9l1"></path>
+        <path d="M175.1 192.31L215.89 211.33L209.55 224.92L168.76 205.9L175.1 192.31Z" id="b3zr8ocpoS"></path>
+        <path d="M200.46 137.93L241.24 156.95L234.9 170.54L194.12 151.53L200.46 137.93Z" id="flwfzHdSF"></path>
+        <path d="M251.17 29.18L291.96 48.19L285.62 61.79L244.83 42.77L251.17 29.18Z" id="dZ9JMO5wc"></path>
+        <path d="M187.78 165.12L228.56 184.14L222.22 197.73L181.44 178.71L187.78 165.12Z" id="b1hnVrTR1"></path>
+        <path d="M213.14 110.74L253.92 129.76L247.58 143.36L206.8 124.34L213.14 110.74Z" id="a1GhzhF2xE"></path>
+        <path d="M276.53 -25.2L317.31 -6.19L310.97 7.41L270.19 -11.61L276.53 -25.2Z" id="a24iH41fBS"></path>
+        <path d="M149.74 246.69L190.53 265.71L184.19 279.3L143.41 260.28L149.74 246.69Z" id="d4iKSYlXrE"></path>
+        <path d="M225.82 83.55L266.6 102.57L260.26 116.17L219.48 97.15L225.82 83.55Z" id="a245xPOh8L"></path>
+        <path d="M238.49 56.36L279.28 75.38L272.94 88.98L232.15 69.96L238.49 56.36Z" id="h7SPbbrqe"></path>
+        <path d="M162.42 219.5L203.21 238.52L196.87 252.11L156.08 233.09L162.42 219.5Z" id="cTvfJSmzt"></path>
+    </defs>
+    <g>
+        <use xlink:href="#bYtjcj2It" opacity="1" fill="#33ff66" fill-opacity="1"></use>
+        <use xlink:href="#a3DXtQ4wRA" opacity="1" fill="#00d251" fill-opacity="1"></use>
+        <use xlink:href="#ccVKqLCWB" opacity="1" fill="#00ad42" fill-opacity="1"></use>
+        <use xlink:href="#eKZBdJ9l1" opacity="1" fill="#00ad42" fill-opacity="1"></use>
+        <use xlink:href="#b3zr8ocpoS" opacity="1" fill="#00ad42" fill-opacity="1"></use>
+        <use xlink:href="#flwfzHdSF" opacity="1" fill="#00ad42" fill-opacity="1"></use>
+        <use xlink:href="#dZ9JMO5wc" opacity="1" fill="#00ad42" fill-opacity="1"></use>
+        <use xlink:href="#b1hnVrTR1" opacity="1" fill="#00ad42" fill-opacity="1"></use>
+        <use xlink:href="#a1GhzhF2xE" opacity="1" fill="#00ad42" fill-opacity="1"></use>
+        <use xlink:href="#a24iH41fBS" opacity="1" fill="#00ad42" fill-opacity="1"></use>
+        <use xlink:href="#d4iKSYlXrE" opacity="1" fill="#00ad42" fill-opacity="1"></use>
+        <use xlink:href="#a245xPOh8L" opacity="1" fill="#00ad42" fill-opacity="1"></use>
+        <use xlink:href="#h7SPbbrqe" opacity="1" fill="#00ad42" fill-opacity="1"></use>
+        <use xlink:href="#cTvfJSmzt" opacity="1" fill="#00ad42" fill-opacity="1"></use>
+    </g>
+</svg>

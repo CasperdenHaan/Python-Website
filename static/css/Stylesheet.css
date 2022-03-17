@@ -1,0 +1,505 @@
+@font-face {
+  font-family: 'Roboto';
+  src: URL('Fonts/Roboto-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Open Sans';
+  src: URL('Fonts/OpenSans.ttf') format('truetype');
+}
+/* https://coolors.co/40404f-292f36-1a1e23-ff7a14-f56a00-48a9ea-1a90e0-13f66a-08d958 */
+* {
+    box-sizing:border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    transition: 0.2s;
+}
+body {
+    background-color: #1A1E23;
+    margin: 0px;
+    padding: 5px;
+    font-family: Roboto;
+    display: grid;
+    grid-template-columns: min-content auto;
+    grid-template-areas:
+        'LBar RBar'
+        'footer footer';
+}
+.footer {
+    width:100%;
+    grid-area: footer;
+}
+
+.LBar {
+    width: 244px;
+    grid-area: LBar;
+}
+.RBar {
+    width: 100%;
+    grid-area: RBar;
+}
+
+/*########################################################################################*/
+/* Special CSS */
+
+tbody {
+    width: 100%;
+}
+
+td{
+    vertical-align:top;
+    padding:0px;
+}
+
+h2 {
+    margin:15px;
+}
+
+input[type=number], input[type=text], select{
+    padding:9.5px;
+    border-radius:10px;
+    font-size:16px;
+    border: 0px;
+    margin:1px;
+}
+img {
+    width:100%;
+    border-radius: 15px;
+}
+button {
+    transition:0.5s;
+}
+
+ul {
+    padding-left: 25px;
+}
+
+button:hover, a:hover,.logo:hover, .navSection div:hover, select:hover{
+    cursor: pointer;
+}
+
+/*########################################################################################*/
+/* Card */
+
+.card{
+    height:100%;
+    background-color: #292F36;
+    padding: 15px;
+    border-radius: 10px;
+    width: 100%;
+    border: 2px solid #40404F;
+    color: #F7FFF7;
+}
+.card button {
+    background-color: #FF7A14;
+    color: white;
+    padding:10px;
+    margin:1px;
+    border-radius:10px;
+    border:none;
+    font-size:16px;
+}
+.card button:hover {
+    background-color: #ff872b;
+}
+
+.wrapper {
+    padding: 5px;
+    width:100%;
+    height: intrinsic;           /* Safari/WebKit uses a non-standard name */
+    height: -moz-max-content;    /* Firefox/Gecko */
+    height: -webkit-max-content; /* Chrome */
+}
+
+.GridCalculate .card > div {
+    display:grid;
+    grid-template-rows: auto min-content;
+    height:100%;
+}
+.GridCalculate .card > div > div > button {
+    width:100%;
+}
+.GridCalculate input {
+    width: 100%;
+}
+.GridCalculate > div > div > div > div:nth-child(2) > input {
+    cursor: default;
+}
+
+/*########################################################################################*/
+/* Grid */
+
+.Grid2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.Grid3 {
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.Grid5 {
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.Grid2M {
+    display:grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+.Grid2 > *,
+.Grid3 > *,
+.Grid5 > * {
+    width: 100%;
+    height: 100%;
+}
+
+.Grid2M > * {
+    width:100%;
+}
+/*########################################################################################*/
+/* Results */
+
+.row .small {
+    width: intrinsic;           /* Safari/WebKit uses a non-standard name */
+    width: -moz-min-content;    /* Firefox/Gecko */
+    width: -webkit-min-content; /* Chrome */
+    margin: auto;
+}
+.results {
+    display:flex;
+}
+.results div {
+    border-radius:10px;
+    padding:5px;
+    background-color:#1A1E23;
+}
+.results div:not(.results div:nth-child(1)){
+    margin-left:15px;
+}
+.results div table tr td, .results div p {
+    background-color:#292F36;
+    padding:5px;
+    border-radius:3px;
+    margin: 0px 0px 5px 0px;
+}
+
+.results div table tr td:nth-child(2){
+    width:100%;
+}
+
+.results table tr td {
+    white-space:nowrap;
+}
+.results table tr td:nth-child(2) {
+    margin:0px;
+}
+
+
+/*########################################################################################*/
+/* Navigation */
+/* Top */
+
+#conBarList button {
+    width: 100%;
+}
+
+#navBarWrapper {
+    display:none;
+}
+
+#navBar {
+    display:flex;
+}
+#navBar > div {
+    width: min-content;
+    position:relative;
+    margin-left:10px;
+}
+#navBar div:nth-child(1){
+    margin-left:0px;
+}
+#navBar div button {
+    background-color: #08D958;
+    border-radius: 15px;
+    padding: 16px;
+    font-size: 18px;
+    color: white;
+    border: none;
+}
+#navBar div div {
+    background-color:#1A1E23;
+    border:1px solid #40404F;
+	border-radius:15px;
+    padding:3px;
+	display:none;
+	position:absolute;
+	z-index: 1;
+	width: fit-content;
+}
+#navBar div div a{
+    background-color: #08D958;
+    border-radius:5px;
+    padding: 12px;
+    font-size: 16px;
+    margin: 5px;
+    color: #F7FFF7;
+    text-decoration: none;
+    display: block;
+    transition:0.5s;
+}
+
+#navBar div:hover div{
+    display:block;
+}
+#navBar div:hover button, #navBar div div a:hover {
+    background-color: #13F66A;
+}
+
+/*####################################*/
+/* Side */
+
+.pageSplitter{
+    width: 100%;
+}
+
+.navSection:nth-child(1){
+    margin: 0px;
+}
+
+.navSection {
+    border-radius: 10px;
+    padding: 5px;
+    background-color:#1A1E23;
+    margin-top:15px;
+}
+.navSection p {
+    margin:0px;
+}
+.navSection div {
+    padding:10px;
+    border-radius: 5px;
+    font-size:18px;
+}
+.navSection div:hover {
+    background-color: #ff7a14;
+    border: 2px solid #ff7a14;
+}
+
+.navSection button {
+    background-color: #1A90E0;
+    border-radius: 5px;
+    padding: 6px;
+    margin-top: 5px;
+    border: none;
+    font-size: 16px;
+    text-align: left;
+}
+.navSection button:hover {
+    background-color: #48A9EA;
+}
+
+/*####################################*/
+/* Bottom */
+
+.breadCrumbTrail .Grid5 {
+    grid-gap: 15px;
+}
+.breadCrumbTrail .Grid5 .item .wrapper {
+    padding:0px;
+}
+.breadCrumbTrail .Grid5 .item .wrapper div div p {
+    font-size: 18px;
+}
+/*########################################################################################*/
+/* Card items */
+
+.itemContainer{
+    width:100%;
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+.item .wrapper {
+    width: 100%;
+    display: block;
+    transform-origin: center;
+    transition: 0.5s;
+}
+
+.item .wrapper:hover {
+    transform: scale(1.025);
+}
+.item div div {
+    padding-top: 60%;
+    border-radius:15px;
+    width:100%;
+    position:relative;
+}
+.item div div img {
+    position:absolute;
+    top:0px;
+}
+.item div div div {
+    background-color:#F7FFF7;
+    border-radius:15px 0px 15px 0px;
+    position:absolute;
+    top:0px;
+    left:0px;
+    padding:10px;
+    width: initial;
+}
+.item div div div p {
+    margin:0px;
+    font-size:20px;
+    color:black;
+}
+
+/*########################################################################################*/
+/* LOGO */
+.logo {
+    width: 200px;
+    position:relative;
+    padding-top: 100%;
+}
+.logo:hover {
+  animation-name: Hover;
+  animation-duration: 7s;
+  animation-iteration-count: infinite;
+}
+.logo div {
+    background-color: #F7FFF7;
+    position: absolute;
+}
+
+.logo .CTL{
+    width:  20%;
+    height: 20%;
+    top:    0px;
+    border-radius: 0px 9999px 9999px 9999px;
+}
+.logo .CBL{
+    width:  20%;
+    height: 20%;
+    top:    80%;
+    border-radius: 9999px;
+}
+.logo .RML{
+    width:  20%;
+    height: 80%;
+    top:    10%;
+}
+
+.logo .CTR{
+    width:  20%;
+    height: 20%;
+    right:  0px;
+    top:    0px;
+    border-radius: 9999px 0px 9999px 9999px;
+}
+.logo .CBR{
+    width:  20%;
+    height: 20%;
+    right:  0px;
+    bottom: 0px;
+    border-radius: 9999px;
+}
+.logo .RMR{
+    width:  20%;
+    height: 80%;
+    top:    10%;
+    left:   80%;
+}
+
+.logo .RMM{
+    width:  100%;
+    height: 20%;
+    top:    40%;
+}
+.logo .RMB{
+    width:  80%;
+    height: 20%;
+    top:    80%;
+    left:   10%;
+}
+
+/*########################################################################################*/
+/* Excess */
+#homepageGrid {
+    display:grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto;
+    grid-template-areas:
+        "Omrekenen info1"
+        "info2 Berekenen";
+}
+
+/*########################################################################################*/
+/* Responsiveness */
+
+
+@media screen and (min-width: 1100px) {
+    body {
+        width:1100px;
+        margin:auto;
+    }
+    body div {
+        width: 100%;
+    }
+}
+@media screen and (max-width: 850px) {
+    .itemContainer {
+        grid-template-columns: auto auto;
+    }
+    .row {
+        display: block;
+    }
+    .Grid2M, .Grid3, .breadCrumbTrail .Grid5{
+        grid-template-columns: 1fr 1fr;
+    }
+    .Grid3 {
+        grid-template-columns: 1fr 1fr;
+    }
+    .results {
+        display:block;
+    }
+    .results div:not(.results div:nth-child(1)) {
+        margin-top:15px!important;
+        margin-left: 0px;
+    }
+    .breadCrumbTrail .Grid5 div:nth-child(5){
+        display:none;
+    }
+
+}
+@media screen and (max-width: 700px) {
+    .itemContainer {
+        grid-template-columns: auto;
+    }
+    #homepageGrid {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "Omrekenen"
+            "info1"
+            "Berekenen"
+            "info2";
+    }
+    .Grid2M, .Grid3, .Grid5{
+        grid-template-columns: 1fr!important;
+    }
+    .breadCrumbTrail .Grid5 div:nth-child(5){
+        display:block;
+    }
+}
+@media screen and (max-width: 550px) {
+    #conBarList, #conBarListWrapper {
+        display:none;
+    }
+    #navBarWrapper {
+        display: block;
+    }
+    body {
+        display: block;
+    }
+    .LBar, .logo {
+        width:100%;
+    }
+}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" viewBox="0 0 500 300" width="500" height="300">
+    <defs>
+        <path d="M0 0L502 0L502 300L0 300L0 0Z" id="bYtjcj2It"></path>
+        <text id="f3puzTYaB" x="0" y="-21.04" font-size="30"
+        font-family="system-ui" font-weight="normal" font-style="normal" letter-spacing="0" xml:space="preserve"
+        alignment-baseline="before-edge" dominant-baseline="text-before-edge" style="line-height:100%"
+        transform="matrix(0.9063441406678148 0.4225402923711777 -0.4225402923711775 0.9063441406678148 66.54507666107537 -176.14320001965936)">
+            <tspan x="0" dy="0em"  >0001010111010010001000000011000101011</tspan>
+            <tspan x="0" dy="1.2em">0010000110100110011111001110100100110</tspan>
+            <tspan x="0" dy="1.2em">1100101001000011001000101101101111001</tspan>
+            <tspan x="0" dy="1.2em">1101100010011000011101110100111000100</tspan>
+            <tspan x="0" dy="1.2em">0010111000011001110100000010010100111</tspan>
+            <tspan x="0" dy="1.2em">0001110011111100010001101100100101001</tspan>
+            <tspan x="0" dy="1.2em">0110001000111001000111011011110011101</tspan>
+            <tspan x="0" dy="1.2em">1010111111101011011011101101000111001</tspan>
+            <tspan x="0" dy="1.2em">0001010000001000011111000101010001100</tspan>
+            <tspan x="0" dy="1.2em">0000010110001011101001010011000000111</tspan>
+            <tspan x="0" dy="1.2em">1001100101111111010111011101110000001</tspan>
+            <tspan x="0" dy="1.2em">0000100001101111011001011010000110000</tspan>
+            <tspan x="0" dy="1.2em">0001101001100111010001011110101000011</tspan>
+        </text>
+
+        <style>
+            tspan {
+                alignment-baseline: before-edge;
+                dominant-baseline: text-before-edge;
+                text-anchor: start;
+                font-family: sans-serif;
+            }
+        </style>
+    </defs>
+
+    <g id="a8jSEEno0">
+        <use xlink:href="#bYtjcj2It" opacity="1" fill="#ff7a14" fill-opacity="1"></use>
+        <use xlink:href="#f3puzTYaB" opacity="1" fill="#e06100" fill-opacity="1"></use>
+    </g>
+</svg>
